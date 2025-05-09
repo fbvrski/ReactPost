@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { usePosts } from "../api/hooks/useJsonPlaceholder";
 import { PostItem } from "../components/posts/PostItem";
-import { SearchBar } from "../components/SearchBar";
+import { SearchBar } from "../components/ui/SearchBar";
 import { Button } from "../components/ui/Button";
 import { AddPostModal } from "../components/posts/AddPostModal";
 import type { Post } from "../types/post";
