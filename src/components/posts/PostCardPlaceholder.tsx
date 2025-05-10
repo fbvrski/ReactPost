@@ -1,5 +1,6 @@
 export const PostCardPlaceholder: React.FC = () => (
   <div
+    data-testid="postcard-placeholder-item"
     aria-hidden="true"
     className="
       flex flex-col

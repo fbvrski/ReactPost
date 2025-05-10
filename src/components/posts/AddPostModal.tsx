@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/Button";
 
 interface AddPostModalProps {
@@ -16,23 +16,27 @@ export const AddPostModal: React.FC<AddPostModalProps> = ({
   const [userId, setUserId] = useState<number>(1);
   const [body, setBody] = useState("");
 
-  useEffect(() => {
-    if (open) {
-      setTitle("");
-      setUserId(1);
-      setBody("");
-    }
-  }, [open]);
-
   if (!open) return null;
+
+  const resetForm = () => {
+    setTitle("");
+    setUserId(1);
+    setBody("");
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    if (!form.reportValidity()) {
-      return;
-    }
+    if (!form.reportValidity()) return;
     onAdd(title, userId, body);
+    resetForm();
+    onClose();
+  };
+
+  const handleReset = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    resetForm();
+    onClose();
   };
 
   return (
@@ -44,6 +48,7 @@ export const AddPostModal: React.FC<AddPostModalProps> = ({
     >
       <form
         onSubmit={handleSubmit}
+        onReset={handleReset}
         className="relative w-full max-w-md bg-white rounded-lg shadow-xl p-6"
       >
         <h2 id="add-post-title" className="text-xl font-semibold mb-4">
@@ -78,14 +83,19 @@ export const AddPostModal: React.FC<AddPostModalProps> = ({
             </label>
             <input
               id="post-userid"
-              type="text"
+              type="number"
               inputMode="numeric"
               required
-              pattern="^[1-9][0-9]*$"
-              value={userId.toString()}
+              min={1}
+              max={10}
+              step={1}
+              value={userId}
               onChange={(e) => {
-                const onlyDigits = e.target.value.replace(/\D/g, "");
-                setUserId(onlyDigits === "" ? 0 : Number(onlyDigits));
+                const value = parseInt(e.target.value, 10);
+                const limitedValue = Number.isNaN(value)
+                  ? 0
+                  : Math.min(Math.max(value, 1), 10);
+                setUserId(limitedValue);
               }}
               className="w-full border border-gray-300 rounded-md p-2"
             />
@@ -111,10 +121,12 @@ export const AddPostModal: React.FC<AddPostModalProps> = ({
         </div>
 
         <div className="mt-6 flex justify-end space-x-2">
-          <Button variant="neutral" onClick={onClose} type="button">
+          <Button variant="neutral" type="reset">
             Cancel
           </Button>
-          <Button type="submit">Add</Button>
+          <Button type="submit" data-testid="add-post-modal">
+            Add
+          </Button>
         </div>
       </form>
     </div>

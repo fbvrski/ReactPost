@@ -1,19 +1,19 @@
-# ReactPosts
+# ReactPost
 
 ### Installation & Setup
 
 1.  **Clone the repository:**
 
     ```
-    git clone git@github.com:fbvrski/ReactPosts.git
+    git clone git@github.com:fbvrski/ReactPost.git
     ```
 
-    (Alternatively, use HTTPS: `git clone https://github.com/fbvrski/ReactPosts.git`)
+    (Alternatively, use HTTPS: `git clone https://github.com/fbvrski/ReactPost.git`)
 
 2.  **Navigate to the project directory:**
 
     ```
-    cd ReactPosts
+    cd ReactPost
     ```
 
 3.  **Install NPM packages:**
@@ -23,6 +23,12 @@
     ```
 
 4.  **Run the development server:**
+
     ```
     npm run dev
+    ```
+
+5.  **Run the test:**
+    ```
+    npm run test
     ```

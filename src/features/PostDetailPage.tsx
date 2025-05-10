@@ -23,8 +23,6 @@ export const PostDetailPage: React.FC = () => {
   });
 
   const post: Post | undefined = remotePost ?? local;
-  const loadingPost = !post && loadingRemote;
-  const postError = !post && remoteError;
 
   const userId = post?.userId ?? 0;
   const {
@@ -35,9 +33,12 @@ export const PostDetailPage: React.FC = () => {
     enabled: !!post,
   });
 
-  if (loadingPost) {
+  if (loadingRemote) {
     return (
-      <div className="max-w-4xl mx-auto p-6 animate-pulse">
+      <div
+        data-testid="post-loading"
+        className="max-w-4xl mx-auto p-6 animate-pulse"
+      >
         <div className="h-10 bg-slate-700 rounded w-3/4 mb-6" />
         <div className="flex items-center space-x-4 mb-6">
           <div className="h-12 w-12 bg-slate-700 rounded-full" />
@@ -56,12 +57,12 @@ export const PostDetailPage: React.FC = () => {
     );
   }
 
-  if (postError || !post) {
+  if (remoteError) {
     return (
       <div className="flex flex-col items-center justify-center text-center px-4 py-10">
         <AlertTriangle className="h-16 w-16 text-red-400 dark:text-red-500 mb-4" />
         <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-2">
-          Error Loading Post
+          Error loading post
         </h2>
         <p className="mb-6 text-slate-600 dark:text-slate-400">
           {remoteErrorObj?.message || "Post not found."}
@@ -71,7 +72,7 @@ export const PostDetailPage: React.FC = () => {
           className="inline-flex items-center px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors"
         >
           <ArrowLeft size={18} className="mr-2 -ml-1" />
-          Back to All Posts
+          Back to all posts
         </Link>
       </div>
     );
