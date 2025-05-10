@@ -30,6 +30,7 @@ export const PostItem: React.FC<Props> = ({ post }) => {
           transition-shadow
           duration-200
           bg-white dark:bg-gray-800
+          hover:border-white
         "
     >
       <div>
