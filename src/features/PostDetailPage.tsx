@@ -37,7 +37,10 @@ export const PostDetailPage: React.FC = () => {
 
   if (loadingPost) {
     return (
-      <div className="max-w-4xl mx-auto p-6 animate-pulse">
+      <div
+        data-testid="post-loading"
+        className="max-w-4xl mx-auto p-6 animate-pulse"
+      >
         <div className="h-10 bg-slate-700 rounded w-3/4 mb-6" />
         <div className="flex items-center space-x-4 mb-6">
           <div className="h-12 w-12 bg-slate-700 rounded-full" />

@@ -114,7 +114,9 @@ export const AddPostModal: React.FC<AddPostModalProps> = ({
           <Button variant="neutral" onClick={onClose} type="button">
             Cancel
           </Button>
-          <Button type="submit">Add</Button>
+          <Button type="submit" data-testid="add-post-modal">
+            Add
+          </Button>
         </div>
       </form>
     </div>
