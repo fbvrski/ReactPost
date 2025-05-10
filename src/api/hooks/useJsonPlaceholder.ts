@@ -43,6 +43,9 @@ export function usePost(
     staleTime: 5 * 60_000,
     enabled,
     ...options,
+    retry: (_, error) => {
+      return (error as any).status !== 404;
+    },
   });
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/Button";
 
 interface AddPostModalProps {
@@ -16,14 +16,6 @@ export const AddPostModal: React.FC<AddPostModalProps> = ({
   const [userId, setUserId] = useState<number>(1);
   const [body, setBody] = useState("");
 
-  useEffect(() => {
-    if (open) {
-      setTitle("");
-      setUserId(1);
-      setBody("");
-    }
-  }, [open]);
-
   if (!open) return null;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,6 +25,9 @@ export const AddPostModal: React.FC<AddPostModalProps> = ({
       return;
     }
     onAdd(title, userId, body);
+    setTitle("");
+    setUserId(1);
+    setBody("");
   };
 
   return (
@@ -114,7 +109,9 @@ export const AddPostModal: React.FC<AddPostModalProps> = ({
           <Button variant="neutral" onClick={onClose} type="button">
             Cancel
           </Button>
-          <Button type="submit">Add</Button>
+          <Button type="submit" data-testid="add-post-modal">
+            Add
+          </Button>
         </div>
       </form>
     </div>

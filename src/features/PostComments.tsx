@@ -14,7 +14,11 @@ export const CommentPlaceholder: React.FC = () => (
 );
 
 export const PostComments: React.FC<{ postId: number }> = ({ postId }) => {
-  const { data: comments, isLoading: loadingComments } = useComments(postId);
+  const {
+    data: comments,
+    isLoading: loadingComments,
+    isError: isErrorComments,
+  } = useComments(postId);
 
   if (loadingComments) {
     return (
@@ -37,8 +41,10 @@ export const PostComments: React.FC<{ postId: number }> = ({ postId }) => {
             <p className="text-slate-300">{c.body}</p>
           </div>
         ))
+      ) : isErrorComments ? (
+        <p className="text-slate-400">Failed to load comments.</p>
       ) : (
-        <p className="text-slate-400">No comments yet.</p>
+        <p className="text-slate-400">No comments found.</p>
       )}
     </section>
   );

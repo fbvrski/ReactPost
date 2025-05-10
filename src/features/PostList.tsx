@@ -106,7 +106,12 @@ export const PostList: React.FC = () => {
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
           Posts Explorer
         </h1>
-        <Button onClick={() => setModalOpen(true)}>Add Post</Button>
+        <Button
+          onClick={() => setModalOpen(true)}
+          data-testid="open-modal-add-button"
+        >
+          Add Post
+        </Button>
       </div>
 
       <div className="w-full md:max-w-md mb-6">
