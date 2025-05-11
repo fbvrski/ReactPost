@@ -1,5 +1,9 @@
 # ReactPost
 
+## Core tech stack
+
+- React, TypeScript, React Query, Vite, Vitest, Tailwind CSS
+
 ### Installation & Setup
 
 1.  **Clone the repository:**
